@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🎯 QR Code Generator | Maathu</title>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f6f9ff, #dfe9f3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      color: #2c3e50;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .card {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input[type="text"]:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0,123,255,0.2);
+    }
+
+    .btn {
+      padding: 12px 24px;
+      font-size: 16px;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      border: none;
+      color: #fff;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 10px 0;
+      transition: 0.3s ease;
+      width: 100%;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      background: linear-gradient(to right, #0072ff, #00c6ff);
+    }
+
+    #qrcode {
+      background: #f2f2f2;
+      border-radius: 12px;
+      padding: 10px;
+      margin-top: 20px;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 14px;
+      text-align: center;
+      color: #777;
+    }
+
+    footer strong {
+      color: #000;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .btn {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🔳 Create Your QR Code Instantly</h1>
+
+  <div class="card">
+    <input type="text" id="qrInput" placeholder="Paste your text, link, number etc..." />
+    <button class="btn" onclick="generateQR()">Generate QR</button>
+    <div id="qrcode"></div>
+    <button class="btn" onclick="downloadQR()">⬇️ Download PNG</button>
+  </div>
+  
+  <br><br><br><br><br><br><br><br><br><br>
+
+  <footer>
+    © 2025 <strong> QR Generator</strong> | Designed by <strong>Mathavan</strong>
+  </footer>
+
+  <script>
+    let qr;
+
+    function generateQR() {
+      const input = document.getElementById("qrInput").value.trim();
+      if (!input) {
+        alert("😅 Please enter some content to generate.");
+        return;
+      }
+
+      document.getElementById("qrcode").innerHTML = "";
+
+      qr = new QRCode(document.getElementById("qrcode"), {
+        text: input,
+        width: 220,
+        height: 220,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+    }
+
+    function downloadQR() {
+      const img = document.querySelector("#qrcode img");
+      if (!img) {
+        alert("❗ Please generate the QR first.");
+        return;
+      }
+
+      const link = document.createElement("a");
+      link.href = img.src;
+      link.download = "maathu-qr-code.png";
+      link.click();
+    }
+  </script>
+
+</body>
+</html>
