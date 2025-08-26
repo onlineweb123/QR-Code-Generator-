@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -90,17 +92,9 @@
     }
 
     @media (max-width: 480px) {
-      .card {
-        padding: 20px;
-      }
-
-      h1 {
-        font-size: 24px;
-      }
-
-      .btn {
-        font-size: 15px;
-      }
+      .card { padding: 20px; }
+      h1 { font-size: 24px; }
+      .btn { font-size: 15px; }
     }
   </style>
 </head>
@@ -113,10 +107,8 @@
     <button class="btn" onclick="generateQR()">Generate QR</button>
     <div id="qrcode"></div>
     <button class="btn" onclick="downloadQR()">⬇️ Download PNG</button>
-  </div>
+  </div> <br><br><br><br><br><br><br><br>
   
-  <br><br><br><br><br><br><br><br><br><br>
-
   <footer>
     © 2025 <strong> QR Generator</strong> | Designed by <strong>Mathavan</strong>
   </footer>
@@ -144,18 +136,22 @@
     }
 
     function downloadQR() {
-      const img = document.querySelector("#qrcode img");
-      if (!img) {
+      const canvas = document.querySelector("#qrcode canvas");
+      if (!canvas) {
         alert("❗ Please generate the QR first.");
         return;
       }
 
       const link = document.createElement("a");
-      link.href = img.src;
+      link.href = canvas.toDataURL("image/png");
       link.download = "maathu-qr-code.png";
       link.click();
     }
   </script>
 
 </body>
+</html>
+
+
+
 </html>
